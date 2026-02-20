@@ -35,11 +35,12 @@ export default function Nav() {
         {/* Logo */}
         <a href="/" className="flex items-center gap-2">
           <Image
-            src={scrolled ? "/images/CRecTech_logo.png" : "/images/CRecTech_logo_white.png"}
+            src="/images/CRecTech_logo.png"
             alt="CRecTech"
             width={120}
             height={40}
             className="h-9 w-auto transition-all duration-300"
+            style={!scrolled ? { filter: "brightness(0) invert(1)" } : undefined}
           />
         </a>
 
