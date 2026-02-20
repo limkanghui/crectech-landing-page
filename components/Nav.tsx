@@ -39,7 +39,8 @@ export default function Nav() {
             alt="CRecTech"
             width={120}
             height={40}
-            className="h-9 w-auto"
+            className="h-9 w-auto transition-all duration-300"
+            style={!scrolled ? { filter: "brightness(0) invert(1)" } : undefined}
           />
         </a>
 
@@ -49,7 +50,11 @@ export default function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="text-sm font-medium text-dark/70 hover:text-primary transition-colors"
+              className={`text-sm font-medium transition-colors ${
+                scrolled
+                  ? "text-dark/70 hover:text-primary"
+                  : "text-white/80 hover:text-white"
+              }`}
             >
               {l.label}
             </a>
@@ -68,7 +73,7 @@ export default function Nav() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 text-dark"
+          className={`md:hidden p-2 transition-colors ${scrolled ? "text-dark" : "text-white"}`}
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
