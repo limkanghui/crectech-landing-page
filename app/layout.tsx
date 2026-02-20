@@ -4,7 +4,10 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
-  title: "CRecTech — Breakthrough Catalytic Technology",
+  title: {
+    template: "%s | CRecTech",
+    default: "CRecTech — Breakthrough Catalytic Technology",
+  },
   description:
     "CRecTech converts waste biogas into renewable bio-methanol using our proprietary CRecREF™ catalyst — cutting production costs by 50% and shipping emissions by 95%.",
 };
