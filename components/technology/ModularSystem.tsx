@@ -84,21 +84,37 @@ export default function ModularSystem() {
           ))}
         </motion.div>
 
-        {/* YouTube embed */}
+        {/* YouTube videos */}
         <motion.div
           initial={fadeInUp.initial}
           whileInView={fadeInUp.animate}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ ...fadeInUp.transition, delay: 0.2 }}
-          className="mt-20 rounded-2xl overflow-hidden shadow-lg"
+          className="mt-20"
         >
-          <iframe
-            className="w-full aspect-video"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-            title="CRecTech Revolutionary Bio-methanol Technology"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          />
+          <h3
+            className="text-xl font-semibold text-dark mb-8 text-center"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            Watch Our Technology in Action
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {[
+              { id: "3e3UZNeTo1Q", title: "CRecTech Revolutionary Bio-methanol Technology" },
+              { id: "ibW1T-Gr-0g", title: "CRecTech Bio-methanol Technology Introduction" },
+              { id: "qp-vzf8ctJk", title: "CRecTech Green Bio-Methanol Technology" },
+            ].map((v) => (
+              <div key={v.id} className="rounded-2xl overflow-hidden shadow-lg">
+                <iframe
+                  className="w-full aspect-video"
+                  src={`https://www.youtube.com/embed/${v.id}`}
+                  title={v.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            ))}
+          </div>
         </motion.div>
 
         {/* CTA */}
