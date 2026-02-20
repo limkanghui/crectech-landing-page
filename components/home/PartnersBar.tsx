@@ -9,23 +9,18 @@ const partners = [
   { src: "/images/partners/breakthrough-energy.png", alt: "Breakthrough Energy" },
 ];
 
-const items = [...partners, ...partners];
-
 export default function PartnersBar() {
   return (
     <section className="py-10 bg-bg-alt border-y border-primary/10 overflow-hidden">
       <p className="text-center text-xs uppercase tracking-widest mb-6 font-medium" style={{ color: "var(--color-muted)" }}>
         Backed &amp; recognised by
       </p>
-      <div className="flex animate-marquee whitespace-nowrap">
-        {items.map((p, i) => (
-          <div
-            key={i}
-            className="inline-flex items-center justify-center mx-10 shrink-0"
-          >
+      <div className="flex animate-marquee whitespace-nowrap" aria-hidden="true">
+        {[...partners, ...partners].map((p, i) => (
+          <div key={i} className="inline-flex items-center justify-center mx-10 shrink-0">
             <Image
               src={p.src}
-              alt={p.alt}
+              alt=""
               width={140}
               height={48}
               className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
@@ -33,6 +28,12 @@ export default function PartnersBar() {
           </div>
         ))}
       </div>
+      {/* Accessible static list hidden visually */}
+      <ul className="sr-only">
+        {partners.map((p) => (
+          <li key={p.alt}>{p.alt}</li>
+        ))}
+      </ul>
     </section>
   );
 }

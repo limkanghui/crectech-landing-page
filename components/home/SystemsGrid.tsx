@@ -59,8 +59,8 @@ export default function SystemsGrid() {
               key={s.num}
               variants={staggerItem}
               whileHover={{ scale: 1.02, y: -4 }}
-              className="rounded-2xl p-8 bg-white border border-primary/10 shadow-sm"
-              style={{ borderTopColor: s.color, borderTopWidth: "3px" }}
+              className="rounded-2xl p-8 bg-white shadow-sm border-l border-r border-b border-primary/10"
+              style={{ borderTop: `3px solid ${s.color}` }}
             >
               <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-sm mb-4">
                 {s.num}

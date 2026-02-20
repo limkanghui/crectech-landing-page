@@ -56,7 +56,10 @@ export default function AboutNewsTeaser() {
               className="rounded-full w-16 h-16 object-cover shrink-0"
             />
             <div>
-              <h3 className="text-white font-bold text-sm leading-snug">
+              <h3
+                className="text-white font-bold text-sm leading-snug"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
                 From PhD to Startup: A Deep Tech Approach to Maritime
                 Decarbonization
               </h3>
