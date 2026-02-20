@@ -16,16 +16,28 @@ export default function NewsGrid() {
           <motion.a
             key={item.title}
             href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
             variants={staggerItem}
             whileHover={{ y: -4, scale: 1.01 }}
             className="rounded-2xl overflow-hidden bg-white border border-primary/10 shadow-sm block group"
           >
             <div
-              className="h-36 flex items-center justify-center p-6"
-              style={{ backgroundColor: item.coverColor }}
+              className="h-36 flex flex-col items-start justify-end p-5 relative overflow-hidden"
+              style={{
+                background: `linear-gradient(135deg, ${item.coverColor} 0%, ${item.coverColorDark} 100%)`,
+              }}
             >
-              <span className="text-white font-bold text-sm text-center leading-snug opacity-80">
-                CRecTech
+              {/* Subtle dot texture */}
+              <div
+                className="absolute inset-0 opacity-10"
+                style={{
+                  backgroundImage: "radial-gradient(circle at 2px 2px, rgba(255,255,255,0.8) 1px, transparent 0)",
+                  backgroundSize: "20px 20px",
+                }}
+              />
+              <span className="relative text-white/50 text-xs uppercase tracking-widest font-medium">
+                {item.source}
               </span>
             </div>
             <div className="p-6">
