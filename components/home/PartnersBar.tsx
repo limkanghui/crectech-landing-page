@@ -23,7 +23,7 @@ export default function PartnersBar() {
               alt=""
               width={140}
               height={48}
-              className="h-10 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
+              className="h-[60px] w-auto object-contain opacity-70 hover:opacity-100 transition-opacity grayscale hover:grayscale-0"
             />
           </div>
         ))}
