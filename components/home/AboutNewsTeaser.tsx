@@ -67,15 +67,14 @@ export default function AboutNewsTeaser() {
             Dr. Kang Hui LIM, Co-founder and CEO of CRecTech
           </p>
 
-          <div className="relative w-full max-w-[260px] mx-auto">
+          
             <Image
               src="/images/home/ceo-portrait.png"
               alt="Dr. Kang Hui Lim, Co-founder and CEO of CRecTech"
               width={500}
               height={600}
-              className="w-full h-auto"
+              className="w-full max-w-[340px] h-auto"
             />
-          </div>
         </motion.div>
       </div>
     </section>
