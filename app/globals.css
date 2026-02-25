@@ -11,7 +11,7 @@
   --color-muted: rgba(26, 46, 31, 0.55);
 
   /* Typography */
-  --font-display: "Fraunces", Georgia, serif;
+  --font-display: "Playfair Display", Georgia, serif;
   --font-body: "DM Sans", system-ui, sans-serif;
 }
 
