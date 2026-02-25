@@ -43,7 +43,7 @@ export default function AdvisoryBoard() {
               whileHover={{ y: -4 }}
               className="rounded-2xl p-6 bg-white border border-primary/10 shadow-sm text-center"
             >
-              <div className="relative w-20 h-20 mx-auto mb-4">
+              <div className="relative w-40 h-40 mx-auto mb-4">
                 <Image
                   src={a.img}
                   alt={a.name}
