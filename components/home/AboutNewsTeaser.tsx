@@ -38,30 +38,34 @@ export default function AboutNewsTeaser() {
           </a>
         </motion.div>
 
-        {/* Right side — heading + CEO portrait */}
+        {/* Right side — portrait with heading overlaid on white space */}
         <motion.div
           initial={slideInRight.initial}
           whileInView={slideInRight.animate}
           viewport={{ once: true, margin: "-80px" }}
           transition={slideInRight.transition}
-          className="flex flex-col items-center text-center"
         >
-          <h3
-            className="text-2xl md:text-3xl font-extrabold text-dark leading-tight mb-2"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            From PhD to Startup: A Deep Tech Approach to Maritime Decarbonization
-          </h3>
-          <p className="text-sm md:text-base font-medium mb-6" style={{ color: "var(--color-muted)" }}>
-            Dr. Kang Hui LIM, Co-founder and CEO of CRecTech
-          </p>
-          <Image
-            src="/images/home/ceo-portrait.png"
-            alt="Dr. Kang Hui Lim, Co-founder and CEO of CRecTech"
-            width={500}
-            height={600}
-            className="w-full max-w-[360px] h-auto"
-          />
+          <div className="relative w-full max-w-[400px] mx-auto">
+            <Image
+              src="/images/home/ceo-portrait.png"
+              alt="Dr. Kang Hui Lim, Co-founder and CEO of CRecTech"
+              width={500}
+              height={600}
+              className="w-full h-auto"
+            />
+            {/* Heading overlaid on white space above the face */}
+            <div className="absolute top-3 left-0 right-0 text-center px-5">
+              <h3
+                className="text-xl md:text-2xl font-extrabold text-dark leading-tight mb-1"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                From PhD to Startup: A Deep Tech Approach to Maritime Decarbonization
+              </h3>
+              <p className="text-xs md:text-sm font-medium" style={{ color: "var(--color-muted)" }}>
+                Dr. Kang Hui LIM, Co-founder and CEO of CRecTech
+              </p>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
