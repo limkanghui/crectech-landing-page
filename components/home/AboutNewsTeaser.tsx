@@ -55,43 +55,27 @@ export default function AboutNewsTeaser() {
           whileInView={slideInRight.animate}
           viewport={{ once: true, margin: "-80px" }}
           transition={slideInRight.transition}
-          className="flex flex-col items-center justify-center text-center"
+          className="flex flex-col items-center justify-start text-center"
         >
           <h3
-            className="text-2xl md:text-3xl font-bold text-dark mb-1 leading-tight"
+            className="text-3xl md:text-4xl font-extrabold text-dark leading-tight mb-3"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            From PhD to Startup:
+            From PhD to Startup: A Deep Tech Approach to Maritime Decarbonization
           </h3>
-          <h3
-            className="text-2xl md:text-3xl font-bold text-dark mb-2 leading-tight"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            A Deep Tech Approach to
-          </h3>
-          <h3
-            className="text-2xl md:text-3xl font-bold text-dark mb-3 leading-tight"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Maritime Decarbonisation
-          </h3>
-          <p className="text-sm font-semibold mb-6" style={{ color: "var(--color-muted)" }}>
+          <p className="text-sm font-medium mb-8" style={{ color: "var(--color-muted)" }}>
             Dr. Kang Hui LIM, Co-founder and CEO of CRecTech
           </p>
 
-          {/* Circular portrait with green background circle */}
-          <div className="relative w-56 h-56 md:w-64 md:h-64">
-            {/* Light green background circle */}
-            <div className="absolute inset-0 rounded-full bg-primary/10" />
-            {/* Portrait image */}
-            <div className="absolute inset-2 rounded-full overflow-hidden">
-              <Image
-                src="/images/home/ceo-portrait.png"
-                alt="Dr. Kang Hui Lim, Co-founder and CEO of CRecTech"
-                fill
-                className="object-cover object-top"
-              />
-            </div>
+          {/* Portrait image — no circle, just the image as-is */}
+          <div className="relative w-full max-w-sm mx-auto">
+            <Image
+              src="/images/home/ceo-portrait.png"
+              alt="Dr. Kang Hui Lim, Co-founder and CEO of CRecTech"
+              width={500}
+              height={600}
+              className="w-full h-auto"
+            />
           </div>
         </motion.div>
       </div>
