@@ -8,34 +8,34 @@ const founders = [
     name: "Dr. Kang Hui LIM",
     title: "Co-Founder & Chief Executive Officer",
     img: "/images/team/kang-hui.png",
-    bio: "Ph.D. Chemical Engineering, NUS (President's Graduate Fellow). Forbes 30 Under 30. 50+ papers in JACS, Advanced Materials, ACS Catalysis.",
-    linkedin: "#",
+    bio: "Dr. Kang Hui Lim holds a Ph.D. in Chemical Engineering from the National University of Singapore, where he was a President\u2019s Graduate Fellow. His expertise includes thermal and non-thermal catalysis, catalytic process modeling, technoeconomic analysis and system optimization. He has published over 50 papers in leading journals such as JACS, Advanced Materials, and ACS Catalysis. He also holds dual first-class honours degrees in Chemical Engineering and Quantitative Economics from NUS and is a Forbes 30 Under 30 honoree. At CRecTech, he leads the company\u2019s business and scale-up strategy for its renewable bio-methanol technology.",
+    linkedin: "https://www.linkedin.com/in/lim-kang-hui/",
   },
   {
     name: "Dr. Kok Giap Haw",
     title: "Co-Founder & Chief Technology Officer",
     img: "/images/team/kok-giap.png",
-    bio: "Ph.D. Chemistry, University of Caen (2015). Post-doctoral researcher across France, Belgium, China, and Singapore. Expert in catalysis and porous materials.",
-    linkedin: "#",
+    bio: "Dr. Kok Giap Haw received his Ph.D. degree in chemistry from the University of Caen (UNICAEN), France, in 2015. He gained an extensive research background as a post-doctoral researcher in France, Belgium, China, and Singapore. Notably, he had a stint with TotalEnergies to develop scalable and commercially viable fluid catalytic cracking catalysts during his Ph.D. study. His primary research expertise is devoted to synthesizing and modifying zeolites and other porous materials that can be used for catalysis, adsorption, and separation, having published in top journals ranging from Angewandte Chemie, ACS Catalysis, etc. With more than ten years of experience in these areas, he is passionate about bringing new catalytic technologies to market.",
+    linkedin: "https://www.linkedin.com/in/kghaw/",
   },
   {
     name: "KK Lai",
     title: "Vice President, Business Development",
     img: "/images/team/kk-lai.png",
-    bio: "40+ years of global agricultural supply chain and logistics experience with ADM, Conagra, FE Zuellig, FCStone, and Yugrusi.",
-    linkedin: "#",
+    bio: "KK Lai brings over 40 years of global agricultural supply chain and logistics experience in grains, proteins, and edible oils with ADM, Conagra, FE Zuellig, FCStone, and Yugrusi.",
+    linkedin: "https://www.linkedin.com/in/kk-lai-16394b15a/",
   },
 ];
 
 const engineers = [
-  { name: "Patnam Ramalingam", title: "Senior Process Engineer", img: "/images/team/rama.png", linkedin: "#" },
-  { name: "Muhammad Syahid Bin Husuhaimi", title: "Process Engineer", img: "/images/team/syahid.png", linkedin: "#" },
-  { name: "Kyle Tye Hao Fei", title: "Process Engineer", img: "/images/team/kyle.png", linkedin: "#" },
+  { name: "Patnam Ramalingam", title: "Senior Process Engineer", img: "/images/team/rama.png", linkedin: "https://www.linkedin.com/in/patnam-ramalingam-3a10a815/" },
+  { name: "Muhammad Syahid Bin Husuhaimi", title: "Process Engineer", img: "/images/team/syahid.png", linkedin: "https://www.linkedin.com/in/msyahidbh/" },
+  { name: "Kyle Tye Hao Fei", title: "Process Engineer", img: "/images/team/kyle.png", linkedin: "https://www.linkedin.com/in/tyehaofei/" },
 ];
 
 export default function TeamGrid() {
   return (
-    <section className="bg-bg-alt py-24 md:py-28 px-6">
+    <section className="px-6 py-24 md:py-28">
       <div className="max-w-7xl mx-auto">
         <motion.div
           initial={fadeInUp.initial}
@@ -51,8 +51,8 @@ export default function TeamGrid() {
             Our <span className="text-primary">Team</span>
           </h2>
           <p className="mt-3 max-w-lg mx-auto" style={{ color: "var(--color-muted)" }}>
-            A talented team committed to turning our ambitions of a carbon
-            renewable technology into reality.
+            We are a talented team committed to turning our ambitions of a carbon
+            renewable technology a reality.
           </p>
         </motion.div>
 
@@ -89,6 +89,8 @@ export default function TeamGrid() {
               <p className="text-xs leading-relaxed mb-4" style={{ color: "var(--color-muted)" }}>{m.bio}</p>
               <a
                 href={m.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={`${m.name} on LinkedIn`}
                 className="inline-flex items-center justify-center w-8 h-8 rounded bg-[#0077B5] text-white text-xs font-bold hover:opacity-90"
               >
@@ -130,6 +132,8 @@ export default function TeamGrid() {
               <p className="text-primary text-xs font-semibold mt-0.5 mb-3">{m.title}</p>
               <a
                 href={m.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={`${m.name} on LinkedIn`}
                 className="inline-flex items-center justify-center w-7 h-7 rounded bg-[#0077B5] text-white text-xs font-bold hover:opacity-90"
               >
