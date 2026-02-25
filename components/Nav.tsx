@@ -31,7 +31,7 @@ export default function Nav() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-auto py-4 flex items-center justify-between">
         {/* Logo */}
         <a href="/" className="flex items-center gap-2">
           <Image
@@ -39,7 +39,7 @@ export default function Nav() {
             alt="CRecTech"
             width={120}
             height={40}
-            className="h-9 w-auto transition-all duration-300"
+            className="h-[144px] w-auto transition-all duration-300"
             style={!scrolled ? { filter: "brightness(0) invert(1)" } : undefined}
           />
         </a>
