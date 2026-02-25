@@ -56,7 +56,7 @@ export default function TeamGrid() {
           </p>
         </motion.div>
 
-        {/* Management / Founders — 30% smaller */}
+        {/* Management / Founders */}
         <motion.div
           variants={staggerContainer}
           initial="initial"
@@ -71,14 +71,12 @@ export default function TeamGrid() {
               whileHover={{ y: -4 }}
               className="rounded-2xl bg-white border border-primary/10 shadow-sm text-center overflow-hidden"
             >
-              {/* Large portrait photo */}
               <div className="relative w-full aspect-[3/4] bg-gray-100">
                 <Image src={m.img} alt={m.name} fill className="object-cover" />
               </div>
               <div className="p-4">
                 <h3 className="font-bold text-dark text-base" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
                 <p className="text-primary text-xs font-semibold mt-1 mb-3">{m.title}</p>
-                {/* Scrollable bio */}
                 <div
                   className="max-h-24 overflow-y-auto text-left pr-2 mb-3"
                   style={{ scrollbarWidth: "thin", scrollbarColor: "#c1c1c1 #f1f1f1" }}
@@ -99,7 +97,7 @@ export default function TeamGrid() {
           ))}
         </motion.div>
 
-        {/* Engineers — 30% smaller */}
+        {/* Engineers */}
         <motion.div
           variants={staggerContainer}
           initial="initial"
@@ -114,9 +112,18 @@ export default function TeamGrid() {
               whileHover={{ y: -4 }}
               className="rounded-2xl bg-white border border-primary/10 shadow-sm text-center overflow-hidden"
             >
-              {/* Smaller portrait photo */}
-              <div className="relative w-full aspect-[4/3] bg-gray-100">
-                <Image src={m.img} alt={m.name} fill className="object-cover object-top" />
+              {/* Photo with green arch background */}
+              <div className="relative w-full aspect-square bg-gray-50 overflow-hidden">
+                {/* Green arch */}
+                <div
+                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] h-[90%] rounded-t-full bg-primary"
+                />
+                <Image
+                  src={m.img}
+                  alt={m.name}
+                  fill
+                  className="object-cover object-top relative z-10"
+                />
               </div>
               <div className="p-3">
                 <h3 className="font-bold text-dark text-xs" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
