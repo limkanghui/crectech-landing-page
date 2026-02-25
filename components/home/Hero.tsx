@@ -55,8 +55,7 @@ export default function Hero() {
             variants={staggerItem}
             className="text-xl text-white/70 mb-8 max-w-xl"
           >
-            In renewable bio-methanol production — cutting costs by 50% and
-            shipping emissions by 95%.
+            In renewable bio-methanol production
           </motion.p>
 
           {/* CTAs */}
