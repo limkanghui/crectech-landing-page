@@ -5,7 +5,7 @@ import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
 
 const founders = [
   {
-    name: "Dr. Kang Hui LIM",
+    name: "Dr. Kang Hui Lim",
     title: "Co-Founder & Chief Executive Officer",
     img: "/images/team/kang-hui.png",
     bio: "Dr. Kang Hui Lim holds a Ph.D. in Chemical Engineering from the National University of Singapore, where he was a President\u2019s Graduate Fellow. His expertise includes thermal and non-thermal catalysis, catalytic process modeling, technoeconomic analysis and system optimization. He has published over 50 papers in leading journals such as JACS, Advanced Materials, and ACS Catalysis. He also holds dual first-class honours degrees in Chemical Engineering and Quantitative Economics from NUS and is a Forbes 30 Under 30 honoree. At CRecTech, he leads the company\u2019s business and scale-up strategy for its renewable bio-methanol technology.",
@@ -56,46 +56,45 @@ export default function TeamGrid() {
           </p>
         </motion.div>
 
-        {/* Founders */}
+        {/* Management / Founders */}
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
         >
           {founders.map((m) => (
             <motion.div
               key={m.name}
               variants={staggerItem}
               whileHover={{ y: -4 }}
-              className="rounded-2xl p-6 bg-white border border-primary/10 shadow-sm text-center"
+              className="rounded-2xl bg-white border border-primary/10 shadow-sm text-center overflow-hidden"
             >
-              <div className="relative w-24 h-24 mx-auto mb-4">
-                <Image
-                  src={m.img}
-                  alt={m.name}
-                  fill
-                  className="rounded-full object-cover border-4 border-primary/20"
-                />
+              {/* Large portrait photo */}
+              <div className="relative w-full aspect-[3/4] bg-gray-100">
+                <Image src={m.img} alt={m.name} fill className="object-cover" />
               </div>
-              <h3
-                className="font-bold text-dark text-base"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {m.name}
-              </h3>
-              <p className="text-primary text-xs font-semibold mt-0.5 mb-3">{m.title}</p>
-              <p className="text-xs leading-relaxed mb-4" style={{ color: "var(--color-muted)" }}>{m.bio}</p>
-              <a
-                href={m.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${m.name} on LinkedIn`}
-                className="inline-flex items-center justify-center w-8 h-8 rounded bg-[#0077B5] text-white text-xs font-bold hover:opacity-90"
-              >
-                in
-              </a>
+              <div className="p-6">
+                <h3 className="font-bold text-dark text-lg" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
+                <p className="text-primary text-sm font-semibold mt-1 mb-4">{m.title}</p>
+                {/* Scrollable bio */}
+                <div
+                  className="max-h-32 overflow-y-auto text-left pr-2 mb-4"
+                  style={{ scrollbarWidth: "thin", scrollbarColor: "#c1c1c1 #f1f1f1" }}
+                >
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>{m.bio}</p>
+                </div>
+                <a
+                  href={m.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={m.name + " on LinkedIn"}
+                  className="inline-flex items-center justify-center w-9 h-9 rounded bg-[#0077B5] text-white text-sm font-bold hover:opacity-90"
+                >
+                  in
+                </a>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -113,32 +112,25 @@ export default function TeamGrid() {
               key={m.name}
               variants={staggerItem}
               whileHover={{ y: -4 }}
-              className="rounded-2xl p-5 bg-white border border-primary/10 shadow-sm text-center"
+              className="rounded-2xl bg-white border border-primary/10 shadow-sm text-center overflow-hidden"
             >
-              <div className="relative w-20 h-20 mx-auto mb-3">
-                <Image
-                  src={m.img}
-                  alt={m.name}
-                  fill
-                  className="rounded-full object-cover border-4 border-primary/10"
-                />
+              {/* Smaller portrait photo */}
+              <div className="relative w-full aspect-[4/3] bg-gray-100">
+                <Image src={m.img} alt={m.name} fill className="object-cover object-top" />
               </div>
-              <h3
-                className="font-bold text-dark text-sm"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {m.name}
-              </h3>
-              <p className="text-primary text-xs font-semibold mt-0.5 mb-3">{m.title}</p>
-              <a
-                href={m.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${m.name} on LinkedIn`}
-                className="inline-flex items-center justify-center w-7 h-7 rounded bg-[#0077B5] text-white text-xs font-bold hover:opacity-90"
-              >
-                in
-              </a>
+              <div className="p-4">
+                <h3 className="font-bold text-dark text-sm" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
+                <p className="text-primary text-xs font-semibold mt-0.5 mb-3">{m.title}</p>
+                <a
+                  href={m.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={m.name + " on LinkedIn"}
+                  className="inline-flex items-center justify-center w-7 h-7 rounded bg-[#0077B5] text-white text-xs font-bold hover:opacity-90"
+                >
+                  in
+                </a>
+              </div>
             </motion.div>
           ))}
         </motion.div>
