@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const links = [
+  { href: "/", label: "Home" },
   { href: "/technology", label: "Technology" },
   { href: "/about", label: "About Us" },
   { href: "/news", label: "News" },
