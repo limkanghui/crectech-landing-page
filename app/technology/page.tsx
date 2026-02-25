@@ -4,6 +4,7 @@ import CatalystSection from "@/components/technology/CatalystSection";
 import SMRStats from "@/components/technology/SMRStats";
 import ProcessComparison from "@/components/technology/ProcessComparison";
 import ModularSystem from "@/components/technology/ModularSystem";
+import TaglineBanner from "@/components/technology/TaglineBanner";
 
 export default function TechnologyPage() {
   return (
@@ -13,6 +14,7 @@ export default function TechnologyPage() {
       <SMRStats />
       <ProcessComparison />
       <ModularSystem />
+      <TaglineBanner />
     </main>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { slideInLeft, slideInRight } from "@/lib/animations";
 
 export default function CatalystSection() {
@@ -12,26 +13,23 @@ export default function CatalystSection() {
           viewport={{ once: true, margin: "-80px" }}
           transition={slideInLeft.transition}
         >
-          <p className="text-primary text-sm uppercase tracking-widest font-semibold mb-3">
-            Bio-methanol from waste biogas using
-          </p>
           <h2
-            className="text-3xl md:text-4xl font-bold text-primary mb-5"
+            className="text-2xl md:text-3xl font-bold text-dark mb-5 leading-tight"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Innovative Catalyst Technology
+            Bio-methanol from waste biogas using Innovative catalyst{" "}
+            <span className="text-primary">technology</span>
           </h2>
           <p className="leading-relaxed mb-4" style={{ color: "var(--color-muted)" }}>
             CRecTech has developed a breakthrough catalyst,{" "}
-            <span className="text-primary font-semibold">CRecREF™</span>, that
-            turns raw biogas — made up of methane and carbon dioxide — directly
-            into renewable bio-methanol in just two steps instead of the
-            conventional four step process.
-          </p>
-          <p className="leading-relaxed mb-4" style={{ color: "var(--color-muted)" }}>
-            Our catalyst not only prevents carbon build-up but also puts CO₂ to
-            work as part of the reaction, producing the perfect gas mixture
-            needed to make methanol.
+            <span className="text-primary font-semibold">
+              CRecREF<sup>TM</sup>
+            </span>
+            , that turns raw biogas, made up of methane and carbon dioxide,
+            directly into renewable bio-methanol in just two steps instead of the
+            conventional four step process. Our catalyst not only prevents carbon
+            build-up but also puts CO&#8322; to work as part of the reaction,
+            producing the perfect gas mixture needed to make methanol.
           </p>
           <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
             This means we skip expensive cleaning and conditioning steps,
@@ -47,17 +45,13 @@ export default function CatalystSection() {
           whileInView={slideInRight.animate}
           viewport={{ once: true, margin: "-80px" }}
           transition={slideInRight.transition}
-          className="relative"
         >
-          <div className="absolute -top-4 -right-4 w-full h-full bg-primary/10 rounded-xl -z-10" />
-          <div
+          <Image
+            src="/images/technology/catalyst.jpg"
+            alt="CRecTech catalyst"
+            width={800}
+            height={600}
             className="rounded-xl w-full shadow-lg"
-            style={{
-              height: "380px",
-              backgroundImage: "url('https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
           />
         </motion.div>
       </div>
