@@ -40,21 +40,13 @@ export default function AboutNewsTeaser() {
           </a>
         </motion.div>
 
-        {/* CEO portrait + heading */}
+        {/* CEO portrait with heading overlaid on white space above */}
         <motion.div
           initial={slideInRight.initial}
           whileInView={slideInRight.animate}
           viewport={{ once: true, margin: "-80px" }}
           transition={slideInRight.transition}
-          className="text-center"
         >
-          <h3
-            className="text-xl md:text-2xl font-bold text-dark mb-2"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            From PhD to Startup
-          </h3>
-          <p className="text-primary font-semibold mb-6">Dr. Kang Hui Lim</p>
           <div className="relative w-full max-w-md mx-auto">
             <Image
               src="/images/home/ceo-portrait.png"
@@ -63,6 +55,18 @@ export default function AboutNewsTeaser() {
               height={600}
               className="rounded-xl w-full"
             />
+            {/* Text overlaid on the white space above the portrait */}
+            <div className="absolute top-4 left-0 right-0 text-center px-4">
+              <h3
+                className="text-lg md:text-xl font-bold text-dark leading-snug"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                From PhD to Startup: A Deep Tech Approach to Maritime Decarbonization
+              </h3>
+              <p className="text-xs md:text-sm font-semibold mt-1" style={{ color: "var(--color-muted)" }}>
+                Dr. Kang Hui LIM, Co-founder and CEO of CRecTech
+              </p>
+            </div>
           </div>
         </motion.div>
       </div>
