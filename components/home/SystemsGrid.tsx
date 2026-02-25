@@ -1,27 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { fadeInUp, staggerContainer, staggerItem } from "@/lib/animations";
-
-const systems = [
-  {
-    num: "01",
-    title: "Modular & Rapid Deployment",
-    desc: "Our catalytic reactor is housed in no more than a shipping container unit, enabling rapid deployment in a plug-and-play modus operandi.",
-    color: "#1D8348",
-  },
-  {
-    num: "02",
-    title: "Plug and Play Integration",
-    desc: "Connects seamlessly to existing biogas, heat, and storage infrastructure with minimal disruption to plant operations.",
-    color: "#D4950A",
-  },
-  {
-    num: "03",
-    title: "Low CAPEX & OPEX Model",
-    desc: "Our baseline system produces up to 10 kMT per annum and is easily scalable — an ideal model for reducing dependence on imported energy.",
-    color: "#1D8348",
-  },
-];
+import { fadeInUp, slideInLeft, slideInRight } from "@/lib/animations";
 
 export default function SystemsGrid() {
   return (
@@ -41,40 +20,57 @@ export default function SystemsGrid() {
             Our Unique{" "}
             <span className="text-primary">Systems</span>
           </h2>
-          <p className="mt-3 max-w-xl mx-auto" style={{ color: "var(--color-muted)" }}>
-            At CRecTech, our philosophy is to build a modular system enabling
-            rapid deployment tapping readily into the plant&apos;s existing resources.
-          </p>
         </motion.div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
-        >
-          {systems.map((s) => (
-            <motion.div
-              key={s.num}
-              variants={staggerItem}
-              whileHover={{ scale: 1.02, y: -4 }}
-              className="rounded-2xl p-8 bg-white shadow-sm border-l border-r border-b border-primary/10"
-              style={{ borderTop: `3px solid ${s.color}` }}
-            >
-              <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white font-bold text-sm mb-4">
-                {s.num}
-              </span>
-              <h3
-                className="text-lg font-bold text-dark mb-2"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                {s.title}
-              </h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>{s.desc}</p>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Text content */}
+          <motion.div
+            initial={slideInLeft.initial}
+            whileInView={slideInLeft.animate}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={slideInLeft.transition}
+            className="space-y-5"
+          >
+            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
+              At CRecTech, our philosophy is to build a modular system which our
+              main catalytic reactor is housed in no more than a shipping
+              container unit. This enables a rapid deployment in a
+              plug-and-play modus operandi tapping readily into the
+              plant&apos;s existing resources such as biogas, heat and steam.
+            </p>
+            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
+              Our baseline system is capable of producing up to 10 kilo metric
+              tonnes per annum and is easily scalable to meet your needs.
+            </p>
+            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
+              Our system is an ideal low CAPEX and OPEX model which can be
+              deployed simultaneously in different far reaching locations to
+              reduce reliance on single point of production source, reducing
+              dependence on imported energy, and increase domestic production.
+            </p>
+            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
+              At CRecTech we strive to provide a total carbon recycle solution.
+            </p>
+          </motion.div>
+
+          {/* YouTube video embed */}
+          <motion.div
+            initial={slideInRight.initial}
+            whileInView={slideInRight.animate}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={slideInRight.transition}
+          >
+            <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
+              <iframe
+                src="https://www.youtube.com/embed/3e3UZNeTo1Q?autoplay=0&rel=0"
+                title="CRecTech Systems Overview"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

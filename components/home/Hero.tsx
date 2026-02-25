@@ -9,7 +9,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 bg-cover bg-center"
         style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80')`,
+          backgroundImage: "url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1600&q=80')",
         }}
       />
       {/* Dark overlay */}
@@ -19,7 +19,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 opacity-10"
         style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #2ECC71 1px, transparent 0)`,
+          backgroundImage: "radial-gradient(circle at 2px 2px, #2ECC71 1px, transparent 0)",
           backgroundSize: "48px 48px",
         }}
       />
@@ -31,13 +31,10 @@ export default function Hero() {
           animate="animate"
           className="max-w-3xl"
         >
-          {/* Badge */}
-          <motion.div variants={staggerItem} className="mb-6">
-            <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/40 text-white text-sm font-medium backdrop-blur-sm">
-              <span className="w-2 h-2 rounded-full bg-primary-light animate-pulse" />
-              Welcome to CRecTech
-            </span>
-          </motion.div>
+          {/* Welcome */}
+          <motion.p variants={staggerItem} className="text-xl text-white/80 mb-4">
+            Welcome To CRecTech
+          </motion.p>
 
           {/* Headline */}
           <motion.h1
@@ -58,34 +55,31 @@ export default function Hero() {
             In renewable bio-methanol production
           </motion.p>
 
-          {/* CTAs */}
+          {/* CTA */}
           <motion.div
             variants={staggerItem}
             className="flex flex-col sm:flex-row gap-4 items-start"
           >
             <a
-              href="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors animate-cta-pulse"
+              href="/about"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors"
             >
-              Book a Meeting →
-            </a>
-            <a
-              href="/technology"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-lg border border-white/30 text-white font-semibold hover:bg-white/10 transition-colors backdrop-blur-sm"
-            >
-              Explore Our Technology ↓
+              Explore More →
             </a>
           </motion.div>
 
           {/* Email */}
           <motion.div
             variants={staggerItem}
-            className="mt-8 flex items-center gap-3 text-white/60 text-sm"
+            className="mt-8 flex items-center gap-3 text-white/70"
           >
-            <span className="text-lg">✉</span>
-            <a href="mailto:contact@crectech.net" className="hover:text-white transition-colors">
-              contact@crectech.net
-            </a>
+            <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary text-white text-lg">✉</span>
+            <div>
+              <p className="text-sm font-semibold text-white">Email</p>
+              <a href="mailto:contact@crectech.net" className="text-sm hover:text-white transition-colors">
+                contact@crectech.net
+              </a>
+            </div>
           </motion.div>
         </motion.div>
       </div>
