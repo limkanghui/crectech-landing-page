@@ -12,6 +12,7 @@ const partners = [
   { src: "/images/partners/block71.png", alt: "BLOCK71 NUS Enterprise" },
   { src: "/images/partners/pier71.png", alt: "PIER71" },
   { src: "/images/partners/astar.png", alt: "A*STAR" },
+  { src: "/images/partners/in-group.jpg", alt: "In Group Holdings" },
 ];
 
 export default function PartnersBar() {
