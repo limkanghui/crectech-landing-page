@@ -28,36 +28,37 @@ export default function Nav() {
       transition={{ duration: 0.5 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-bg/90 backdrop-blur-md border-b border-primary/10 shadow-sm"
+          ? "bg-white/95 backdrop-blur-md border-b border-gray-200/60 shadow-sm"
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 h-auto py-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <a href="/" className="flex items-center gap-2">
+        <a href="/" className="flex items-center gap-2 shrink-0">
           <Image
             src="/images/CRecTech_logo.png"
             alt="CRecTech"
-            width={120}
-            height={40}
-            className="h-[144px] w-auto transition-all duration-300"
+            width={200}
+            height={60}
+            className="h-14 w-auto transition-all duration-300"
             style={!scrolled ? { filter: "brightness(0) invert(1)" } : undefined}
           />
         </a>
 
         {/* Desktop links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className={`text-sm font-medium transition-colors ${
+              className={`text-[15px] font-medium transition-colors relative group ${
                 scrolled
-                  ? "text-dark/70 hover:text-primary"
-                  : "text-white/80 hover:text-white"
+                  ? "text-gray-700 hover:text-primary"
+                  : "text-white/90 hover:text-white"
               }`}
             >
               {l.label}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
@@ -66,7 +67,7 @@ export default function Nav() {
         <div className="hidden md:block">
           <a
             href="mailto:khlim@crectech.net?subject=Meeting%20Request%20-%20CRecTech"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors animate-cta-pulse"
+            className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-primary text-white text-sm font-semibold hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 transition-all duration-300"
           >
             Book a Meeting →
           </a>
@@ -86,19 +87,19 @@ export default function Nav() {
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="md:hidden bg-bg/95 backdrop-blur-md border-b border-primary/10 px-6 pb-4">
+        <div className="md:hidden bg-white/95 backdrop-blur-md border-b border-gray-200/60 px-6 pb-4">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="block py-3 text-sm font-medium text-dark/70 border-b border-primary/5 hover:text-primary"
+              className="block py-3 text-sm font-medium text-gray-700 border-b border-gray-100 hover:text-primary transition-colors"
             >
               {l.label}
             </a>
           ))}
           <a
             href="mailto:khlim@crectech.net?subject=Meeting%20Request%20-%20CRecTech"
-            className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold"
+            className="mt-3 inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-white text-sm font-semibold"
           >
             Book a Meeting →
           </a>
