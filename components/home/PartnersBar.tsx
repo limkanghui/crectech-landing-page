@@ -7,6 +7,11 @@ const partners = [
   { src: "/images/partners/sginnovate.png", alt: "SGInnovate" },
   { src: "/images/partners/temasek.png", alt: "Temasek" },
   { src: "/images/partners/breakthrough-energy.png", alt: "Breakthrough Energy" },
+  { src: "/images/partners/enterprise-singapore.png", alt: "Enterprise Singapore" },
+  { src: "/images/partners/shell-startup-engine.png", alt: "Shell StartUp Engine" },
+  { src: "/images/partners/block71.png", alt: "BLOCK71 NUS Enterprise" },
+  { src: "/images/partners/pier71.png", alt: "PIER71" },
+  { src: "/images/partners/astar.png", alt: "A*STAR" },
 ];
 
 export default function PartnersBar() {
