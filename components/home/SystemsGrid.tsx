@@ -62,7 +62,7 @@ export default function SystemsGrid() {
           >
             <div className="relative w-full aspect-video rounded-xl overflow-hidden shadow-lg">
               <iframe
-                src="https://www.youtube.com/embed/3e3UZNeTo1Q?autoplay=0&rel=0"
+                src="https://www.youtube.com/embed/3e3UZNeTo1Q?autoplay=1&rel=0"
                 title="CRecTech Systems Overview"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
