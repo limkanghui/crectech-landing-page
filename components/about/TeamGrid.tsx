@@ -56,13 +56,13 @@ export default function TeamGrid() {
           </p>
         </motion.div>
 
-        {/* Management / Founders */}
+        {/* Management / Founders — 30% smaller */}
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12 max-w-4xl mx-auto"
         >
           {founders.map((m) => (
             <motion.div
@@ -75,22 +75,22 @@ export default function TeamGrid() {
               <div className="relative w-full aspect-[3/4] bg-gray-100">
                 <Image src={m.img} alt={m.name} fill className="object-cover" />
               </div>
-              <div className="p-6">
-                <h3 className="font-bold text-dark text-lg" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
-                <p className="text-primary text-sm font-semibold mt-1 mb-4">{m.title}</p>
+              <div className="p-4">
+                <h3 className="font-bold text-dark text-base" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
+                <p className="text-primary text-xs font-semibold mt-1 mb-3">{m.title}</p>
                 {/* Scrollable bio */}
                 <div
-                  className="max-h-32 overflow-y-auto text-left pr-2 mb-4"
+                  className="max-h-24 overflow-y-auto text-left pr-2 mb-3"
                   style={{ scrollbarWidth: "thin", scrollbarColor: "#c1c1c1 #f1f1f1" }}
                 >
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-muted)" }}>{m.bio}</p>
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--color-muted)" }}>{m.bio}</p>
                 </div>
                 <a
                   href={m.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={m.name + " on LinkedIn"}
-                  className="inline-flex items-center justify-center w-9 h-9 rounded bg-[#0077B5] text-white text-sm font-bold hover:opacity-90"
+                  className="inline-flex items-center justify-center w-8 h-8 rounded bg-[#0077B5] text-white text-xs font-bold hover:opacity-90"
                 >
                   in
                 </a>
@@ -99,13 +99,13 @@ export default function TeamGrid() {
           ))}
         </motion.div>
 
-        {/* Engineers */}
+        {/* Engineers — 30% smaller */}
         <motion.div
           variants={staggerContainer}
           initial="initial"
           whileInView="animate"
           viewport={{ once: true, margin: "-80px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+          className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-3xl mx-auto"
         >
           {engineers.map((m) => (
             <motion.div
@@ -118,15 +118,15 @@ export default function TeamGrid() {
               <div className="relative w-full aspect-[4/3] bg-gray-100">
                 <Image src={m.img} alt={m.name} fill className="object-cover object-top" />
               </div>
-              <div className="p-4">
-                <h3 className="font-bold text-dark text-sm" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
-                <p className="text-primary text-xs font-semibold mt-0.5 mb-3">{m.title}</p>
+              <div className="p-3">
+                <h3 className="font-bold text-dark text-xs" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
+                <p className="text-primary text-[10px] font-semibold mt-0.5 mb-2">{m.title}</p>
                 <a
                   href={m.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={m.name + " on LinkedIn"}
-                  className="inline-flex items-center justify-center w-7 h-7 rounded bg-[#0077B5] text-white text-xs font-bold hover:opacity-90"
+                  className="inline-flex items-center justify-center w-6 h-6 rounded bg-[#0077B5] text-white text-[10px] font-bold hover:opacity-90"
                 >
                   in
                 </a>
