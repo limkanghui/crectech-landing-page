@@ -56,7 +56,7 @@ export default function Footer() {
               </a>
             </p>
             <a
-              href="/contact"
+              href="mailto:khlim@crectech.net?subject=Meeting%20Request%20-%20CRecTech"
               className="mt-4 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-primary text-white text-sm font-semibold hover:bg-primary/90 transition-colors"
             >
               Book a Meeting →

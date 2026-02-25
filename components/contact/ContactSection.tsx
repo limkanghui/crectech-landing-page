@@ -41,12 +41,12 @@ export default function ContactSection() {
           opportunities and partnership.
         </p>
         <a
-          href="https://calendly.com/crectech"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="mailto:khlim@crectech.net?subject=Meeting%20Request%20-%20CRecTech"
+          
+          
           className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors animate-cta-pulse text-base"
         >
-          Schedule via Calendly →
+          Book a Meeting →
         </a>
       </motion.div>
 

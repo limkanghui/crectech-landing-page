@@ -96,7 +96,7 @@ export default function ModularSystem() {
             Ready to explore deployment for your operations?
           </p>
           <a
-            href="/contact"
+            href="mailto:khlim@crectech.net?subject=Meeting%20Request%20-%20CRecTech"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-primary text-white font-semibold hover:bg-primary/90 transition-colors animate-cta-pulse text-base"
           >
             Book a Meeting →
