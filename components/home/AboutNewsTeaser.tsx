@@ -5,15 +5,15 @@ import { slideInLeft, slideInRight } from "@/lib/animations";
 
 export default function AboutNewsTeaser() {
   return (
-    <section className="px-6 py-16 md:py-20 max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+    <section className="px-6 py-10 md:py-14 max-w-6xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
         {/* About Us — green card */}
         <motion.div
           initial={slideInLeft.initial}
           whileInView={slideInLeft.animate}
           viewport={{ once: true, margin: "-80px" }}
           transition={slideInLeft.transition}
-          className="relative rounded-3xl bg-primary text-white p-8 md:p-10 flex flex-col justify-between overflow-hidden"
+          className="relative rounded-3xl bg-primary text-white p-7 md:p-8 flex flex-col overflow-hidden"
         >
           {/* Decorative corner fold */}
           <div
@@ -26,12 +26,12 @@ export default function AboutNewsTeaser() {
 
           <div className="relative z-10">
             <h2
-              className="text-3xl md:text-4xl font-bold mb-5"
+              className="text-3xl font-bold mb-3"
               style={{ fontFamily: "var(--font-display)" }}
             >
               About US
             </h2>
-            <p className="text-white/85 leading-relaxed text-[15px]">
+            <p className="text-white/85 leading-relaxed text-sm">
               CRecTech is a deep-tech startup spun off from the National University
               of Singapore. Our team of dedicated individuals are focused on
               transforming waste CO&#8322; to green bio-methanol, a sustainable marine
@@ -43,7 +43,7 @@ export default function AboutNewsTeaser() {
 
           <a
             href="/about"
-            className="mt-6 inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-primary font-semibold hover:bg-white/90 transition-colors text-sm w-fit"
+            className="mt-5 inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white text-primary font-semibold hover:bg-white/90 transition-colors text-sm w-fit"
           >
             Read More →
           </a>
@@ -55,20 +55,19 @@ export default function AboutNewsTeaser() {
           whileInView={slideInRight.animate}
           viewport={{ once: true, margin: "-80px" }}
           transition={slideInRight.transition}
-          className="flex flex-col items-center justify-start text-center"
+          className="flex flex-col items-center text-center"
         >
           <h3
-            className="text-2xl md:text-3xl font-extrabold text-dark leading-tight mb-2"
+            className="text-xl md:text-2xl font-extrabold text-dark leading-snug mb-1"
             style={{ fontFamily: "var(--font-display)" }}
           >
             From PhD to Startup: A Deep Tech Approach to Maritime Decarbonization
           </h3>
-          <p className="text-sm font-medium mb-4" style={{ color: "var(--color-muted)" }}>
+          <p className="text-xs font-medium mb-3" style={{ color: "var(--color-muted)" }}>
             Dr. Kang Hui LIM, Co-founder and CEO of CRecTech
           </p>
 
-          {/* Portrait image in rounded card */}
-          <div className="relative w-full max-w-xs mx-auto rounded-3xl border border-gray-100 shadow-sm overflow-hidden bg-white">
+          <div className="relative w-full max-w-[260px] mx-auto">
             <Image
               src="/images/home/ceo-portrait.png"
               alt="Dr. Kang Hui Lim, Co-founder and CEO of CRecTech"
