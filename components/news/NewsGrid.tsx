@@ -23,15 +23,12 @@ export default function NewsGrid() {
       >
         {visibleItems.map((item) => (
           <motion.a
-            key={item.title}
-            href={item.href}
-            target="_blank"
-            rel="noopener noreferrer"
+            key={item.slug}
+            href={"/news/" + item.slug}
             variants={staggerItem}
             whileHover={{ y: -4, scale: 1.01 }}
             className="rounded-2xl overflow-hidden bg-white border border-primary/10 shadow-sm block group"
           >
-            {/* Thumbnail image */}
             <div className="relative w-full aspect-[16/10] overflow-hidden bg-gray-100">
               <Image
                 src={item.image}
@@ -53,7 +50,6 @@ export default function NewsGrid() {
         ))}
       </motion.div>
 
-      {/* Load More button */}
       {hasMore && (
         <div className="mt-12 text-center">
           <button
