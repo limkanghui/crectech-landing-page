@@ -112,18 +112,8 @@ export default function TeamGrid() {
               whileHover={{ y: -4 }}
               className="rounded-2xl bg-white border border-primary/10 shadow-sm text-center overflow-hidden"
             >
-              {/* Photo with green arch background */}
-              <div className="relative w-full aspect-square bg-gray-50 overflow-hidden">
-                {/* Green arch */}
-                <div
-                  className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[85%] h-[90%] rounded-t-full bg-primary"
-                />
-                <Image
-                  src={m.img}
-                  alt={m.name}
-                  fill
-                  className="object-cover object-top relative z-10"
-                />
+              <div className="relative w-full aspect-square">
+                <Image src={m.img} alt={m.name} fill className="object-cover object-top" />
               </div>
               <div className="p-3">
                 <h3 className="font-bold text-dark text-xs" style={{ fontFamily: "var(--font-display)" }}>{m.name}</h3>
