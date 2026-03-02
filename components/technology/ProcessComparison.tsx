@@ -9,8 +9,8 @@ const conventional = [
   "Methanol synthesis",
 ];
 const crectech = [
-  "Biogas input",
-  "CRecREF™ direct conversion → Bio-methanol",
+  "Steam biogas reforming",
+  "Methanol Synthesis",
 ];
 
 export default function ProcessComparison() {
