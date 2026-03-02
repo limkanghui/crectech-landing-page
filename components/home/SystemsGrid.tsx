@@ -1,6 +1,6 @@
 "use client";
-import { useRef } from "react";
-import { motion, useScroll, useTransform, useInView } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { fadeInUp } from "@/lib/animations";
 
 const VIDEO_ID = "3e3UZNeTo1Q";
@@ -8,21 +8,43 @@ const VIDEO_TITLE = "CRecTech Revolutionary Bio-methanol Technology";
 
 export default function SystemsGrid() {
   const videoRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
 
-  // Track scroll progress of the video container relative to viewport
-  const { scrollYProgress } = useScroll({
-    target: videoRef,
-    offset: ["start end", "end start"],
-  });
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
 
-  // Smooth scroll-driven fade-in / fade-out
-  // Fade in: scroll 5%-25% | Fully visible: 25%-78% | Dissolve out: 78%-98%
-  const opacity = useTransform(scrollYProgress, [0.05, 0.25, 0.78, 0.98], [0, 1, 1, 0]);
-  const scale = useTransform(scrollYProgress, [0.05, 0.25, 0.78, 0.98], [0.92, 1, 1, 0.96]);
-  const y = useTransform(scrollYProgress, [0.05, 0.25], [40, 0]);
+    let exitTimer: ReturnType<typeof setTimeout> | null = null;
+    let enteredOnce = false;
 
-  // Only mount the iframe when video area is near the viewport (perf)
-  const isNearView = useInView(videoRef, { margin: "300px 0px 300px 0px" });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Entering viewport - clear any pending dissolve
+          if (exitTimer) {
+            clearTimeout(exitTimer);
+            exitTimer = null;
+          }
+          enteredOnce = true;
+          setHasEntered(true);
+          setIsVisible(true);
+        } else if (enteredOnce) {
+          // Leaving viewport - dissolve with a small delay
+          exitTimer = setTimeout(() => {
+            setIsVisible(false);
+          }, 500);
+        }
+      },
+      { threshold: 0.12 }
+    );
+
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (exitTimer) clearTimeout(exitTimer);
+    };
+  }, []);
 
   return (
     <section className="bg-bg-alt pt-24 md:pt-32 pb-12 md:pb-20">
@@ -79,13 +101,22 @@ export default function SystemsGrid() {
         </motion.div>
       </div>
 
-      {/* Full-width video - scroll-driven fade in, autoplay, dissolve out */}
+      {/* Full-width video - fades in on scroll, dissolves on exit */}
       <div ref={videoRef} className="mt-16 px-4 md:px-8 lg:px-12">
         <motion.div
-          style={{ opacity, scale, y }}
+          initial={{ opacity: 0, y: 50, scale: 0.94 }}
+          animate={
+            isVisible
+              ? { opacity: 1, y: 0, scale: 1 }
+              : { opacity: 0, y: -20, scale: 0.97 }
+          }
+          transition={{
+            duration: 1,
+            ease: [0.25, 0.46, 0.45, 0.94],
+          }}
           className="max-w-6xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl bg-dark"
         >
-          {isNearView && (
+          {hasEntered && (
             <iframe
               src={
                 "https://www.youtube.com/embed/" +
