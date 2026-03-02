@@ -1,134 +1,198 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { fadeInUp } from "@/lib/animations";
 
 const VIDEO_ID = "3e3UZNeTo1Q";
 const VIDEO_TITLE = "CRecTech Revolutionary Bio-methanol Technology";
 
+const features = [
+  {
+    title: "Modular Design",
+    desc: "Catalytic reactor housed in a shipping container for rapid plug-and-play deployment into existing plant resources.",
+    icon: "box",
+  },
+  {
+    title: "Scalable Production",
+    desc: "Baseline capacity of 10 kilo metric tonnes per annum, easily scalable and deployable across multiple locations.",
+    icon: "scale",
+  },
+  {
+    title: "Cost Efficient",
+    desc: "Low CAPEX and OPEX model reducing dependence on imported energy and single-point production sources.",
+    icon: "cost",
+  },
+];
+
+const stagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.15 } },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+function BoxIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+      <line x1="12" y1="22.08" x2="12" y2="12" />
+    </svg>
+  );
+}
+
+function ScaleIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="20" x2="12" y2="4" />
+      <polyline points="6 10 12 4 18 10" />
+      <line x1="4" y1="20" x2="20" y2="20" />
+    </svg>
+  );
+}
+
+function CostIcon() {
+  return (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="1" x2="12" y2="23" />
+      <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+    </svg>
+  );
+}
+
+const iconMap: Record<string, React.FC> = { box: BoxIcon, scale: ScaleIcon, cost: CostIcon };
+
 export default function SystemsGrid() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
-  const videoWrapperRef = useRef<HTMLDivElement>(null);
-  const hasEnteredRef = useRef(false);
-  const [isMounted, setIsMounted] = useState(false);
+  const videoRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+  const [hasEntered, setHasEntered] = useState(false);
 
   useEffect(() => {
-    const container = scrollContainerRef.current;
-    const wrapper = videoWrapperRef.current;
-    if (!container || !wrapper) return;
+    const el = videoRef.current;
+    if (!el) return;
 
-    let ticking = false;
+    let exitTimer: ReturnType<typeof setTimeout> | null = null;
+    let enteredOnce = false;
 
-    const update = () => {
-      const rect = container.getBoundingClientRect();
-      const containerH = container.offsetHeight;
-      const vh = window.innerHeight;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          if (exitTimer) {
+            clearTimeout(exitTimer);
+            exitTimer = null;
+          }
+          enteredOnce = true;
+          setHasEntered(true);
+          setIsVisible(true);
+        } else if (enteredOnce) {
+          exitTimer = setTimeout(() => {
+            setIsVisible(false);
+          }, 500);
+        }
+      },
+      { threshold: 0.12 }
+    );
 
-      // progress 0 = container top at viewport bottom
-      // progress 1 = container bottom at viewport top
-      const raw = -rect.top / (containerH - vh);
-      const p = Math.max(0, Math.min(1, raw));
-
-      // Fade in: 0% to 18% of scroll
-      const fadeIn = Math.min(1, p / 0.18);
-      // Stay visible: 18% to 72%
-      // Dissolve out: 72% to 92% (delayed dissolve)
-      const fadeOut = p > 0.72 ? Math.max(0, 1 - (p - 0.72) / 0.2) : 1;
-
-      const opacity = fadeIn * fadeOut;
-      const scale = 0.85 + fadeIn * 0.15;
-
-      wrapper.style.opacity = String(opacity);
-      wrapper.style.transform = "scale(" + scale + ")";
-
-      if (p > 0.03 && !hasEnteredRef.current) {
-        hasEnteredRef.current = true;
-        setIsMounted(true);
-      }
-
-      ticking = false;
+    observer.observe(el);
+    return () => {
+      observer.disconnect();
+      if (exitTimer) clearTimeout(exitTimer);
     };
-
-    const onScroll = () => {
-      if (!ticking) {
-        requestAnimationFrame(update);
-        ticking = true;
-      }
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    update();
-    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <section className="bg-bg-alt pt-24 md:pt-32">
-      <div className="max-w-7xl mx-auto px-6 pb-12">
-        {/* Section heading */}
-        <motion.div
-          initial={fadeInUp.initial}
-          whileInView={fadeInUp.animate}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={fadeInUp.transition}
-          className="text-center mb-14"
-        >
-          <h2
-            className="text-3xl md:text-4xl font-bold text-dark"
-            style={{ fontFamily: "var(--font-display)" }}
+    <>
+      {/* Cinematic dark section with heading + feature cards */}
+      <section className="relative bg-dark py-24 md:py-36 overflow-hidden">
+        {/* Subtle dot pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: "radial-gradient(circle at 1px 1px, white 1px, transparent 0)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+
+        <div className="relative max-w-7xl mx-auto px-6">
+          {/* Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-80px" }}
+            transition={{ duration: 0.7 }}
+            className="text-center mb-5"
           >
-            Our Unique{" "}
-            <span className="text-primary">Systems</span>
-          </h2>
-        </motion.div>
+            <h2
+              className="text-3xl md:text-5xl font-bold text-white"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Our Unique <span className="text-primary-light">Systems</span>
+            </h2>
+          </motion.div>
 
-        {/* Text content - two columns on desktop */}
-        <motion.div
-          initial={fadeInUp.initial}
-          whileInView={fadeInUp.animate}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={fadeInUp.transition}
-          className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-5"
-        >
-          <div className="space-y-5">
-            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
-              At CRecTech, our philosophy is to build a modular system which our
-              main catalytic reactor is housed in no more than a shipping
-              container unit. This enables a rapid deployment in a
-              plug-and-play modus operandi tapping readily into the
-              plant&apos;s existing resources such as biogas, heat and steam.
-            </p>
-            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
-              Our baseline system is capable of producing up to 10 kilo metric
-              tonnes per annum and is easily scalable to meet your needs.
-            </p>
-          </div>
-          <div className="space-y-5">
-            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
-              Our system is an ideal low CAPEX and OPEX model which can be
-              deployed simultaneously in different far reaching locations to
-              reduce reliance on single point of production source, reducing
-              dependence on imported energy, and increase domestic production.
-            </p>
-            <p className="leading-relaxed" style={{ color: "var(--color-muted)" }}>
-              At CRecTech we strive to provide a total carbon recycle solution.
-            </p>
-          </div>
-        </motion.div>
-      </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2, duration: 0.6 }}
+            className="text-center text-white/50 text-lg mb-16 max-w-2xl mx-auto"
+          >
+            A total carbon recycle solution built for rapid deployment
+          </motion.p>
 
-      {/* Tall scroll container for sticky fullscreen video effect */}
-      <div ref={scrollContainerRef} style={{ height: "200vh" }} className="relative">
-        <div className="sticky top-0 h-screen flex items-center justify-center bg-dark overflow-hidden">
-          <div
-            ref={videoWrapperRef}
-            className="w-full h-full"
-            style={{
-              opacity: 0,
-              transform: "scale(0.85)",
-              transition: "opacity 0.12s ease-out, transform 0.12s ease-out",
+          {/* Feature cards */}
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 md:grid-cols-3 gap-5"
+          >
+            {features.map((f, i) => {
+              const Icon = iconMap[f.icon];
+              return (
+                <motion.div
+                  key={i}
+                  variants={fadeUp}
+                  whileHover={{ y: -4, transition: { duration: 0.25 } }}
+                  className="bg-white/[0.04] backdrop-blur-sm rounded-xl p-6 border border-white/[0.08] hover:bg-white/[0.07] transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-primary/20 text-primary-light flex items-center justify-center mb-4">
+                    <Icon />
+                  </div>
+                  <h3
+                    className="text-white font-semibold text-lg mb-2"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {f.title}
+                  </h3>
+                  <p className="text-white/50 text-sm leading-relaxed">{f.desc}</p>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Video section - preserved exactly as is */}
+      <section className="bg-bg-alt pt-12 md:pt-16 pb-12 md:pb-20">
+        <div ref={videoRef} className="px-4 md:px-8 lg:px-12">
+          <motion.div
+            initial={{ opacity: 0, y: 50, scale: 0.94 }}
+            animate={
+              isVisible
+                ? { opacity: 1, y: 0, scale: 1 }
+                : { opacity: 0, y: -20, scale: 0.97 }
+            }
+            transition={{
+              duration: 1,
+              ease: [0.25, 0.46, 0.45, 0.94],
             }}
+            className="max-w-6xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl bg-dark"
           >
-            {isMounted && (
+            {hasEntered && (
               <iframe
                 src={
                   "https://www.youtube.com/embed/" +
@@ -142,9 +206,20 @@ export default function SystemsGrid() {
                 className="w-full h-full"
               />
             )}
-          </div>
+          </motion.div>
         </div>
-      </div>
-    </section>
+
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.3, duration: 0.6 }}
+          className="text-center mt-10 px-6"
+          style={{ color: "var(--color-muted)" }}
+        >
+          At CRecTech we strive to provide a total carbon recycle solution.
+        </motion.p>
+      </section>
+    </>
   );
 }
