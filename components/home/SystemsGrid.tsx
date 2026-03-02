@@ -7,48 +7,63 @@ const VIDEO_ID = "3e3UZNeTo1Q";
 const VIDEO_TITLE = "CRecTech Revolutionary Bio-methanol Technology";
 
 export default function SystemsGrid() {
-  const videoRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasEntered, setHasEntered] = useState(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const videoWrapperRef = useRef<HTMLDivElement>(null);
+  const hasEnteredRef = useRef(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
+    const container = scrollContainerRef.current;
+    const wrapper = videoWrapperRef.current;
+    if (!container || !wrapper) return;
 
-    let exitTimer: ReturnType<typeof setTimeout> | null = null;
-    let enteredOnce = false;
+    let ticking = false;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          // Entering viewport - clear any pending dissolve
-          if (exitTimer) {
-            clearTimeout(exitTimer);
-            exitTimer = null;
-          }
-          enteredOnce = true;
-          setHasEntered(true);
-          setIsVisible(true);
-        } else if (enteredOnce) {
-          // Leaving viewport - dissolve with a small delay
-          exitTimer = setTimeout(() => {
-            setIsVisible(false);
-          }, 500);
-        }
-      },
-      { threshold: 0.12 }
-    );
+    const update = () => {
+      const rect = container.getBoundingClientRect();
+      const containerH = container.offsetHeight;
+      const vh = window.innerHeight;
 
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      if (exitTimer) clearTimeout(exitTimer);
+      // progress 0 = container top at viewport bottom
+      // progress 1 = container bottom at viewport top
+      const raw = -rect.top / (containerH - vh);
+      const p = Math.max(0, Math.min(1, raw));
+
+      // Fade in: 0% to 18% of scroll
+      const fadeIn = Math.min(1, p / 0.18);
+      // Stay visible: 18% to 72%
+      // Dissolve out: 72% to 92% (delayed dissolve)
+      const fadeOut = p > 0.72 ? Math.max(0, 1 - (p - 0.72) / 0.2) : 1;
+
+      const opacity = fadeIn * fadeOut;
+      const scale = 0.85 + fadeIn * 0.15;
+
+      wrapper.style.opacity = String(opacity);
+      wrapper.style.transform = "scale(" + scale + ")";
+
+      if (p > 0.03 && !hasEnteredRef.current) {
+        hasEnteredRef.current = true;
+        setIsMounted(true);
+      }
+
+      ticking = false;
     };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <section className="bg-bg-alt pt-24 md:pt-32 pb-12 md:pb-20">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-bg-alt pt-24 md:pt-32">
+      <div className="max-w-7xl mx-auto px-6 pb-12">
         {/* Section heading */}
         <motion.div
           initial={fadeInUp.initial}
@@ -101,36 +116,34 @@ export default function SystemsGrid() {
         </motion.div>
       </div>
 
-      {/* Full-width video - fades in on scroll, dissolves on exit */}
-      <div ref={videoRef} className="mt-16 px-4 md:px-8 lg:px-12">
-        <motion.div
-          initial={{ opacity: 0, y: 50, scale: 0.94 }}
-          animate={
-            isVisible
-              ? { opacity: 1, y: 0, scale: 1 }
-              : { opacity: 0, y: -20, scale: 0.97 }
-          }
-          transition={{
-            duration: 1,
-            ease: [0.25, 0.46, 0.45, 0.94],
-          }}
-          className="max-w-6xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl bg-dark"
-        >
-          {hasEntered && (
-            <iframe
-              src={
-                "https://www.youtube.com/embed/" +
-                VIDEO_ID +
-                "?autoplay=1&mute=1&rel=0&loop=1&playlist=" +
-                VIDEO_ID
-              }
-              title={VIDEO_TITLE}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              className="w-full h-full"
-            />
-          )}
-        </motion.div>
+      {/* Tall scroll container for sticky fullscreen video effect */}
+      <div ref={scrollContainerRef} style={{ height: "200vh" }} className="relative">
+        <div className="sticky top-0 h-screen flex items-center justify-center bg-dark overflow-hidden">
+          <div
+            ref={videoWrapperRef}
+            className="w-full h-full"
+            style={{
+              opacity: 0,
+              transform: "scale(0.85)",
+              transition: "opacity 0.12s ease-out, transform 0.12s ease-out",
+            }}
+          >
+            {isMounted && (
+              <iframe
+                src={
+                  "https://www.youtube.com/embed/" +
+                  VIDEO_ID +
+                  "?autoplay=1&mute=1&rel=0&loop=1&playlist=" +
+                  VIDEO_ID
+                }
+                title={VIDEO_TITLE}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className="w-full h-full"
+              />
+            )}
+          </div>
+        </div>
       </div>
     </section>
   );
