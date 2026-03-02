@@ -69,48 +69,63 @@ function CostIcon() {
 const iconMap: Record<string, React.FC> = { box: BoxIcon, scale: ScaleIcon, cost: CostIcon };
 
 export default function SystemsGrid() {
-  const videoRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasEntered, setHasEntered] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const videoWrapRef = useRef<HTMLDivElement>(null);
+  const mountedRef = useRef(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const el = videoRef.current;
-    if (!el) return;
+    const container = scrollRef.current;
+    const wrapper = videoWrapRef.current;
+    if (!container || !wrapper) return;
 
-    let exitTimer: ReturnType<typeof setTimeout> | null = null;
-    let enteredOnce = false;
+    let ticking = false;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (exitTimer) {
-            clearTimeout(exitTimer);
-            exitTimer = null;
-          }
-          enteredOnce = true;
-          setHasEntered(true);
-          setIsVisible(true);
-        } else if (enteredOnce) {
-          exitTimer = setTimeout(() => {
-            setIsVisible(false);
-          }, 500);
-        }
-      },
-      { threshold: 0.12 }
-    );
+    const update = () => {
+      const rect = container.getBoundingClientRect();
+      const ch = container.offsetHeight;
+      const vh = window.innerHeight;
 
-    observer.observe(el);
-    return () => {
-      observer.disconnect();
-      if (exitTimer) clearTimeout(exitTimer);
+      // 0 = container top at viewport bottom, 1 = container bottom at viewport top
+      const raw = -rect.top / (ch - vh);
+      const p = Math.max(0, Math.min(1, raw));
+
+      // Fade in: 0 to 20%
+      const fadeIn = Math.min(1, p / 0.2);
+      // Stay visible: 20% to 70%
+      // Dissolve: 70% to 92%
+      const fadeOut = p > 0.7 ? Math.max(0, 1 - (p - 0.7) / 0.22) : 1;
+
+      const opacity = fadeIn * fadeOut;
+      const scale = 0.88 + fadeIn * 0.12;
+
+      wrapper.style.opacity = String(opacity);
+      wrapper.style.transform = "scale(" + scale + ")";
+
+      if (p > 0.02 && !mountedRef.current) {
+        mountedRef.current = true;
+        setIsMounted(true);
+      }
+
+      ticking = false;
     };
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
     <>
       {/* Cinematic dark section with heading + feature cards */}
       <section className="relative bg-dark py-24 md:py-36 overflow-hidden">
-        {/* Subtle dot pattern */}
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
@@ -120,7 +135,6 @@ export default function SystemsGrid() {
         />
 
         <div className="relative max-w-7xl mx-auto px-6">
-          {/* Heading */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -146,7 +160,6 @@ export default function SystemsGrid() {
             A total carbon recycle solution built for rapid deployment
           </motion.p>
 
-          {/* Feature cards */}
           <motion.div
             variants={stagger}
             initial="hidden"
@@ -180,23 +193,19 @@ export default function SystemsGrid() {
         </div>
       </section>
 
-      {/* Video section - preserved exactly as is */}
-      <section className="bg-bg-alt pt-12 md:pt-16 pb-12 md:pb-20">
-        <div ref={videoRef} className="px-4 md:px-8 lg:px-12">
-          <motion.div
-            initial={{ opacity: 0, y: 50, scale: 0.94 }}
-            animate={
-              isVisible
-                ? { opacity: 1, y: 0, scale: 1 }
-                : { opacity: 0, y: -20, scale: 0.97 }
-            }
-            transition={{
-              duration: 1,
-              ease: [0.25, 0.46, 0.45, 0.94],
+      {/* Fullscreen cinematic video - sticky scroll effect */}
+      <div ref={scrollRef} style={{ height: "220vh" }} className="relative bg-dark">
+        <div className="sticky top-0 h-screen w-full overflow-hidden">
+          <div
+            ref={videoWrapRef}
+            className="w-full h-full"
+            style={{
+              opacity: 0,
+              transform: "scale(0.88)",
+              willChange: "opacity, transform",
             }}
-            className="max-w-6xl mx-auto aspect-video rounded-2xl overflow-hidden shadow-2xl bg-dark"
           >
-            {hasEntered && (
+            {isMounted && (
               <iframe
                 src={
                   "https://www.youtube.com/embed/" +
@@ -210,15 +219,18 @@ export default function SystemsGrid() {
                 className="w-full h-full"
               />
             )}
-          </motion.div>
+          </div>
         </div>
+      </div>
 
+      {/* Closing tagline after video */}
+      <section className="bg-bg-alt py-12">
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-center mt-10 px-6"
+          className="text-center px-6 italic"
           style={{ color: "var(--color-muted)" }}
         >
           At CRecTech we strive to provide a total carbon recycle solution.
