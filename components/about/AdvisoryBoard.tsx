@@ -41,9 +41,9 @@ export default function AdvisoryBoard() {
               key={a.name}
               variants={staggerItem}
               whileHover={{ y: -4 }}
-              className="rounded-2xl p-6 bg-white border border-primary/10 shadow-sm text-center"
+              className="rounded-2xl p-4 md:p-6 bg-white border border-primary/10 shadow-sm text-center"
             >
-              <div className="relative w-40 h-40 mx-auto mb-4">
+              <div className="relative w-24 h-24 md:w-40 md:h-40 mx-auto mb-4">
                 <Image
                   src={a.img}
                   alt={a.name}
