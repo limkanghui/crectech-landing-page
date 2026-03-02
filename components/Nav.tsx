@@ -40,7 +40,7 @@ export default function Nav() {
             alt="CRecTech"
             width={200}
             height={60}
-            className="h-14 w-auto transition-all duration-300"
+            className="h-[84px] w-auto transition-all duration-300"
             style={!scrolled ? { filter: "brightness(0) invert(1)" } : undefined}
           />
         </a>
