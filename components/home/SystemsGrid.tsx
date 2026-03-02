@@ -16,7 +16,7 @@ export default function SystemsGrid() {
   });
 
   // Smooth scroll-driven fade-in / fade-out
-  // Fade in:  scroll 5%-25%  |  Fully visible: 25%-78%  |  Dissolve out: 78%-98%
+  // Fade in: scroll 5%-25% | Fully visible: 25%-78% | Dissolve out: 78%-98%
   const opacity = useTransform(scrollYProgress, [0.05, 0.25, 0.78, 0.98], [0, 1, 1, 0]);
   const scale = useTransform(scrollYProgress, [0.05, 0.25, 0.78, 0.98], [0.92, 1, 1, 0.96]);
   const y = useTransform(scrollYProgress, [0.05, 0.25], [40, 0]);
@@ -44,7 +44,7 @@ export default function SystemsGrid() {
           </h2>
         </motion.div>
 
-        {/* Text content – two columns on desktop */}
+        {/* Text content - two columns on desktop */}
         <motion.div
           initial={fadeInUp.initial}
           whileInView={fadeInUp.animate}
@@ -79,7 +79,7 @@ export default function SystemsGrid() {
         </motion.div>
       </div>
 
-      {/* Full-width video – scroll-driven fade in / autoplay / dissolve out */}
+      {/* Full-width video - scroll-driven fade in, autoplay, dissolve out */}
       <div ref={videoRef} className="mt-16 px-4 md:px-8 lg:px-12">
         <motion.div
           style={{ opacity, scale, y }}
