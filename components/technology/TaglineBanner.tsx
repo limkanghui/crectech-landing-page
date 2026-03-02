@@ -14,7 +14,9 @@ export default function TaglineBanner() {
           className="text-2xl md:text-3xl font-bold text-white"
           style={{ fontFamily: "var(--font-display)" }}
         >
-          Breakthrough catalytic technology for renewable bio-methanol production
+          Breakthrough catalytic technology for
+          <br />
+          renewable bio-methanol production
         </motion.p>
       </div>
     </section>
