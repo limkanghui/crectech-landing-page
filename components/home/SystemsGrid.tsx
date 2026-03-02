@@ -97,10 +97,9 @@ export default function SystemsGrid() {
       const fadeOut = p > 0.7 ? Math.max(0, 1 - (p - 0.7) / 0.22) : 1;
 
       const opacity = fadeIn * fadeOut;
-      const scale = 0.88 + fadeIn * 0.12;
 
       wrapper.style.opacity = String(opacity);
-      wrapper.style.transform = "scale(" + scale + ")";
+      wrapper.style.visibility = opacity > 0.01 ? "visible" : "hidden";
 
       if (p > 0.02 && !mountedRef.current) {
         mountedRef.current = true;
@@ -193,34 +192,29 @@ export default function SystemsGrid() {
         </div>
       </section>
 
-      {/* Fullscreen cinematic video - sticky scroll effect */}
-      <div ref={scrollRef} style={{ height: "220vh" }} className="relative bg-dark">
-        <div className="sticky top-0 h-screen w-full overflow-hidden">
-          <div
-            ref={videoWrapRef}
-            className="w-full h-full"
-            style={{
-              opacity: 0,
-              transform: "scale(0.88)",
-              willChange: "opacity, transform",
-            }}
-          >
-            {isMounted && (
-              <iframe
-                src={
-                  "https://www.youtube.com/embed/" +
-                  VIDEO_ID +
-                  "?autoplay=1&mute=1&rel=0&loop=1&playlist=" +
-                  VIDEO_ID
-                }
-                title={VIDEO_TITLE}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            )}
-          </div>
-        </div>
+      {/* Scroll sentinel - creates vertical space for video scroll zone */}
+      <div ref={scrollRef} style={{ height: "250vh" }} className="relative bg-dark" />
+
+      {/* Fixed fullscreen video overlay - inset:0 guarantees full viewport coverage */}
+      <div
+        ref={videoWrapRef}
+        className="fixed inset-0 z-[45] pointer-events-none"
+        style={{ opacity: 0, visibility: "hidden", backgroundColor: "#1A2E1F" }}
+      >
+        {isMounted && (
+          <iframe
+            src={
+              "https://www.youtube.com/embed/" +
+              VIDEO_ID +
+              "?autoplay=1&mute=1&rel=0&loop=1&playlist=" +
+              VIDEO_ID
+            }
+            title={VIDEO_TITLE}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            className="w-full h-full pointer-events-none"
+          />
+        )}
       </div>
 
       {/* Closing tagline after video */}
