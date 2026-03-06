@@ -56,10 +56,10 @@ export default function ProcessComparison() {
           <ol className="space-y-3">
             {conventional.map((step, i) => (
               <li key={i} className="flex items-center gap-3 text-sm text-dark/70">
-                <span className="w-6 h-6 rounded-full bg-red-50 border border-red-200 text-red-500 text-xs font-bold flex items-center justify-center shrink-0">
+                <span className="w-6 h-6 rounded-full bg-red-50 border border-red-200 text-red-500 text-xs font-bold inline-flex items-center justify-center shrink-0 leading-none">
                   {i + 1}
                 </span>
-                {step}
+                <span className="leading-6">{step}</span>
               </li>
             ))}
           </ol>
@@ -88,11 +88,11 @@ export default function ProcessComparison() {
           </p>
           <ol className="space-y-3">
             {crectech.map((step, i) => (
-              <li key={i} className="flex items-start gap-3 text-sm text-dark/70">
-                <span className="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
+              <li key={i} className="flex items-center gap-3 text-sm text-dark/70">
+                <span className="w-6 h-6 rounded-full bg-primary text-white text-xs font-bold inline-flex items-center justify-center shrink-0 leading-none">
                   {i + 1}
                 </span>
-                {step}
+                <span className="leading-6">{step}</span>
               </li>
             ))}
           </ol>
