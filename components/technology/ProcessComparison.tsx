@@ -42,7 +42,7 @@ export default function ProcessComparison() {
           whileInView={fadeInUp.animate}
           viewport={{ once: true }}
           transition={{ ...fadeInUp.transition, delay: 0 }}
-          className="rounded-2xl p-8 bg-white border border-red-100 shadow-sm"
+          className="rounded-2xl p-8 bg-white border border-red-100 shadow-sm flex flex-col"
         >
           <h3
             className="font-bold text-dark mb-2"
@@ -74,7 +74,7 @@ export default function ProcessComparison() {
           whileInView={fadeInUp.animate}
           viewport={{ once: true }}
           transition={{ ...fadeInUp.transition, delay: 0.15 }}
-          className="rounded-2xl p-8 bg-white shadow-sm border-l border-r border-b border-primary/10"
+          className="rounded-2xl p-8 bg-white shadow-sm border-l border-r border-b border-primary/10 flex flex-col"
           style={{ borderTop: "3px solid #1D8348", boxShadow: "0 4px 32px 0 rgba(29,131,72,0.10)" }}
         >
           <h3
@@ -96,7 +96,7 @@ export default function ProcessComparison() {
               </li>
             ))}
           </ol>
-          <div className="mt-5 pt-5 border-t border-primary/10 text-xs text-primary font-semibold">
+          <div className="mt-auto pt-5 border-t border-primary/10 text-xs text-primary font-semibold">
             No CCS required · CO₂ used as reactant · 95% shipping emission cut
           </div>
         </motion.div>
